@@ -1,0 +1,70 @@
+﻿@model IEnumerable<barCode.Models.Producto>
+
+@{
+    ViewBag.Title = "Index";
+}
+<h2 style="color: white">Lista de Productos</h2>
+
+<body>
+
+    <div class="row">
+        <div class="col-md-3">
+            <a href="/Productos/Create" class="btn btn-info">Agregar</a>
+        </div>
+
+        <div class="col-md-9" align="right">
+            <form action="~/Productos/Buscador">
+                <input type="text" name="nombre" placeholder="Nombre del Producto" class="form-control" />
+                <p></p>
+                <input type="submit" value="Buscar" class="btn btn-info" />
+            </form>
+        </div>
+
+    </div>
+
+
+    <p></p>
+
+    <table class="table table-bordered table-hover" style="background-color:white">
+        <tr class="panel-title panel-primary">
+
+            
+            <th>Foto</th>
+            <th>Nombre</th>
+            <th>Marca</th>
+            <th>Categoria</th>
+            <th>Stock</th>
+            <th>Precio 12u.</th>
+            <th>Descripcion</th>
+            <th>Eliminado</th>
+            <th>Opciones</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                
+                <td><img src="@Url.Content(item.Foto)" height="100" width="100" /></td>
+                <td>@Html.DisplayFor(modelItem => item.NombreProd)</td>
+                <td>@Html.DisplayFor(modelItem => item.Marca)</td>
+                <td>@Html.DisplayFor(modelItem => item.IdCategoria)</td>
+                <td>@Html.DisplayFor(modelItem => item.Stock)</td>
+                <td>@String.Format("{0:C}", item.Precio)</td>
+                <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                <td>@Html.DisplayFor(modelItem => item.Eliminado)</td>
+
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdProducto }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdProducto })
+                </td>
+            </tr>
+        }
+    </table>
+
+    @for (int i = 1; i < ViewBag.Total; i++)
+    {
+        <a class="btn btn-default" href="~/Productos/Index?pagina=@i">@i</a>
+    }
+</body>
+

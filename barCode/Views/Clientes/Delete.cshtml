@@ -1,0 +1,88 @@
+﻿@model barCode.Models.Cliente
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 style="color:white">Eliminar</h2>
+
+<h3 style="color:white">Estas seguro??</h3>
+<div>
+    <h4 style="color:white">Cliente</h4>
+    <hr />
+    <dl class="dl-horizontal" style="color:white">
+        <dt>
+            @Html.DisplayNameFor(model => model.Rut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombres)
+        </dd>
+
+        <dt>
+            Apellido Paterno
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApPaterno)
+        </dd>
+
+        <dt>
+            Apellido Materno
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApMaterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaNacimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaNacimiento)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-info" /> |
+            <a class="btn btn-info" href="/Clientes">Volver</a>
+        </div>
+    }
+</div>

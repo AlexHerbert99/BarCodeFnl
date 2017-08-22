@@ -1,0 +1,54 @@
+.panel:hover{
+  border: 6px solid #fff;
+  box-shadow: 0 0 17px rgba(0,0,0,0.30);
+}
+
+
+
+a:hover{
+  text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+    color: black;
+
+}
+
+hr {
+  height: 1px;
+}
+
+footer{
+  background:url(../images/footer_gray.png);
+  color: white;
+}
+
+footer a, footer a:visited{
+  color: white;
+}
+
+.center{
+  text-align: center;
+}
+
+
+
+a.ihover-tw:hover{
+  color: #2daae1;
+}
+a.ihover-gp:hover{
+  color: #d34836;
+}
+a.ihover-fb:hover{
+  color: #3b5998;
+}
+
+.h-menu > li > a {
+  color: white;
+}
+
+.h-menu > li > a:hover {
+    background-color: ##3c3f41;
+    color: #ffffff;
+}

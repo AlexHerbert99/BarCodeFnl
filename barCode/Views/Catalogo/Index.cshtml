@@ -1,0 +1,138 @@
+﻿@model IEnumerable<barCode.Models.Producto>
+@{
+    ViewBag.Title = "Index";
+}
+<!--CSS-->
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        background-image: url(~/Imagenes/Slider2.jpg);
+    }
+
+    .pro {
+        width: 260px;
+        height: 310px;
+        display: inline-block;
+        vertical-align: top;
+        align-items:center;
+        display: inline-block;
+        text-align: center;
+        border-radius: 15px;
+        padding: 5px;
+        margin: 10px;
+    }
+
+        .pro img {
+            width: 50%;
+            height: 50%;
+        }
+</style>
+
+<!--Header-->
+<div class="grid">
+    <div class="">
+        <h5></h5>
+    </div>
+</div>
+
+<div class="row">
+    <div class="">
+
+        <div class="col-md-8">
+            <h4 style="color:white">Las Mejores cervezas Artesanales Nacionales estan con la Teleton.</h4>  
+            <p class="text-bold" style="color:white">Todos los productos son con despacho gratis por tiempo limitado !!</p>          
+        </div>
+
+        <div class="col-md-4" align="right">
+
+            <form action="~/Catalogo/Buscador">
+                <input class="form-control" name="Nombre" id="Nombre" /><p></p>
+                <input type="submit" value="Buscar" class="btn btn-info" />
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<hr class="bg-green">
+
+
+
+<!--Articulos Catalogo-->
+<article>
+    @foreach (var item in Model)
+    {
+        <div class="frame pro thumbnail">
+            <form action="~/Carrito/Agregar">
+                <div>
+                    <div class="">
+                        <header>
+                            <h4 class="text-shadow text-bold">@item.NombreProd</h4>
+                            <input type="hidden" name="id" value="@item.IdProducto" />
+                            <button type="submit" value="Agregar" class="btn btn-xs btn-success text-shadow">Añadir al Carrito</button>
+                            <img src="@Url.Content(item.Foto)" height="130" width="130" />
+                        </header>
+                    </div>
+                </div>
+            </form>
+
+            <div class="">
+                
+                <p class="text-muted">Caja 12 Unidades</p>
+                <p class="text-muted">Grados: @item.Grado°</p>              
+                <div><h4 class="text-bold text-info">@string.Format("{0:C}", item.Precio)</h4></div>
+            </div>
+            
+            <div class="row">
+                <a data-id="@item.IdProducto" data-toggle="modal" href="#myModal" class="btnDetalle btn btn-xs btn-info">Conócela</a>    
+            </div>
+        </div>
+
+    }
+</article>
+
+@for (int i=1; i < ViewBag.Total; i++)
+{
+    <a class="btn btn-primary" href="~/Catalogo/Index?pagina=@i">@i</a>
+}
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!--modal-->
+        <div class="modal-content">
+
+           
+
+            <div class="modal-body">
+                <div id="modal-content">
+
+                </div>
+            </div>
+
+           
+        </div>
+    </div>
+</div>
+
+<!--References-->
+<div>
+    <link href="~/Content/metro-responsive.css" rel="stylesheet">
+    <link href="~/Content/Fondo.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+</div>
+
+@section scripts{
+<script>
+    $(".btnDetalle").click(function (eve) {
+
+        $("#modal-content").load("/Productos/Details/" + $(this).data("id"));
+
+    });
+</script>
+}

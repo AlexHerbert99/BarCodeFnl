@@ -1,0 +1,82 @@
+﻿@model barCode.Models.Cliente
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 style="color:white">Detalles</h2>
+
+<div>
+    <h4 style="color:white">Cliente</h4>
+    <hr />
+    <dl class="dl-horizontal" style="color:white">
+        <dt>
+            @Html.DisplayNameFor(model => model.Rut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApPaterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApPaterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApMaterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApMaterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pass)
+        </dd>
+
+        <dt>
+            Fecha de Nacimiento
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaNacimiento)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdCliente }) |
+    <a href="/Clientes">Back to List</a>
+</p>

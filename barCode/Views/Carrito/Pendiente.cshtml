@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Pendiente";
+}
+
+<h2 style="color:white">Sitio en Construcción</h2>
+
+<script>
+function validar(obj){
+	var d = document.formulario;
+	if(obj.checked==true){
+		d.boton.disabled = false;
+	}else{
+		d.boton.disabled= true;
+	}
+}
+</script>
+<form name="formulario">
+    <input type="checkbox" value="1" name="pepe" onclick="javascript:validar(this);">
+    <input type="Button" value="Enviar" name="boton" disabled>
+</form>
+

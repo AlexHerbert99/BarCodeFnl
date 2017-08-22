@@ -1,0 +1,103 @@
+﻿@model IEnumerable<barCode.Models.Carrito>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="col-md-8">
+        <h2 style="color:white">Carrito de Compras</h2>
+    </div>
+    <div class="col-md-4" align="right">
+        <p></p>
+    
+        <a class="btnLogin btn btn-success" href="/Catalogo/Index" role="button">Seguir Agregando</a> |
+        
+        @if (Session["Usuario"] == null)
+        {
+            <a href="#myModal" class="btnLogin btn btn-info" data-toggle="modal">Comprar</a>
+        }
+        else
+        {
+            <a class="btnComprar btn btn-primary text-shadow" href="#myModal" data-toggle="modal">Pagar</a>
+        }        
+    </div>
+</div>
+
+<table class="table table-hover table-bordered" style="background-color:white">
+    <tr>
+        <th>Foto</th>
+        <th>Nombre</th>
+        <th>Marca</th>
+        <th>Valor Caja</th>
+        <th>Cajas</th>
+        <th>Subtotal</th>
+        <th>Opciones</th>
+    </tr>
+    @{
+        double total = 0;
+    }
+
+    @foreach (var item in Model)
+    {
+        total += (double)(item.Cantidad * item.PrecioUnitario);
+        double stotal = (double)(item.Cantidad * item.PrecioUnitario);
+        
+        <tr>
+            <td><img src="@Url.Content(item.ImagenProducto)" height="100" width="100" /></td>
+            <td>@item.NombreProducto</td>
+            <td>@Html.DisplayFor(modelItem => item.Marca)</td>
+            <td>@String.Format("{0:C}", item.PrecioUnitario)</td>
+            <td>@Html.DisplayFor(modelItem => item.Cantidad)</td>
+            <td>@String.Format("{0:C}", total)</td>
+            <td>@Html.ActionLink("Eliminar", "Borrar", new { id = item.IdProducto })</td>
+        </tr>
+    }
+    <tfoot>
+        <tr>
+            <th colspan="5">Total</th>
+            <th>@String.Format("{0:C}", total)</th>
+        </tr>
+    </tfoot>
+
+</table>
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!--modal-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+
+            <div class="modal-body">
+                <div id="modal-content">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $(".btnLogin").click(function (eve) {
+
+            $("#modal-content").load("/Login/Index/" + $(this).data("id"));
+
+        });
+    </script>
+
+    <script>
+        $(".btnComprar").click(function (eve) {
+
+            $("#modal-content").load("/Pasarela/Index/" + $(this).data("id"));
+
+        });
+    </script>
+}

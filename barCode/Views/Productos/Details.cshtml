@@ -1,0 +1,40 @@
+﻿@model barCode.Models.Producto
+
+@{   
+    Layout = null;
+}
+
+
+
+<body>    
+    <div class=""> 
+        <h3>@Html.DisplayFor(model => model.NombreProd)</h3>
+        <hr />
+        <div class="row">
+            <div class="col-md-2">
+                <img src="@Url.Content(Model.Foto)" height="130" width="130" />
+            </div>
+            <p></p>
+            <div class="col-lg-10" align="left">                           
+                <dd style="color:black">@Html.DisplayFor(model => model.Descripcion)</dd><p></p>                
+                <dd class="text-bold text-info">Caja 12 Unidades: $@Html.DisplayFor(model => model.Precio)</dd>                
+            </div>
+        </div>
+        <p></p>
+        <hr />
+        <div>           
+            <form action="~/Carrito/Agregar/">
+                <input type="hidden" name="id" value="@Model.IdProducto" />
+                <button type="submit" value="Agregar" class="btn btn-success text-shadow">Añadir al Carrito</button>
+            </form>
+            <p></p>
+            <a class="btn btn-default" href="/Catalogo/Index">Cerrar</a>
+        </div>
+        
+    </div>
+</body>
+
+
+
+
+

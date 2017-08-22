@@ -1,0 +1,94 @@
+﻿@model IEnumerable<barCode.Models.Cliente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="color:white">Lista de Clientes</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <a href="/Clientes/Create" class="btn btn-info">Agregar</a>
+    </div>
+
+    <div class="col-md-9" align="right">
+        <form action="~/Clientes/Buscador">
+            <input type="text" name="nombre" placeholder="Nombre del Cliente" class="form-control" />
+            <p></p>
+            <input type="submit" value="Buscar" class="btn btn-info" />
+        </form>
+    </div>
+
+</div>
+
+
+<p></p>
+
+<table class="table table-bordered table-hover" style="background-color:white">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Rut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombres)
+        </th>
+        <th>
+            Apellido Paterno
+        </th>
+        <th>
+            Apellido Materno
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pass)
+        </th>
+        <th>
+            Fecha de Nacimiento
+        </th>
+        <th>Opciones</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApPaterno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApMaterno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaNacimiento)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.IdCliente }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IdCliente })
+        </td>
+    </tr>
+}
+
+</table>
+
+@for (int i = 1; i < ViewBag.Total; i++)
+{
+    <a class="btn btn-default" href="~/Productos/Index?pagina=@i">@i</a>
+}

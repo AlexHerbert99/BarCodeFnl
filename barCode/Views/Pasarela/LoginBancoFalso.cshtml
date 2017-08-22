@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "LoginBancoFalso";
+}
+
+<div align="center">
+    <h2 style="color:white">Banco Falso</h2>
+    <h4 style="color:white">Iniciar Sesion</h4> 
+    <form action="/BancoFalso/LoginBco">
+        <input type="text" placeholder="user" id="user" class="form-control" /><p></p>
+        <input type="password" id="pass" class="form-control" placeholder="Password" /><p></p>
+        <input type="button" value="Enviar" class="btn btn-info" onclick="IniciarSesionBcoFalso()" />
+    </form>
+</div>
+
+<script>
+    function IniciarSesionBcoFalso() {
+        var usuario = $("#user").val();
+        var pass = $("#pass").val();
+
+        if(!StringIsNullOrEmpty(usuario)){
+            if(!StringIsNullOrEmpty(pass)){
+                EjecutarAjax("/BancoFalso/loginBanco", ["user", "pass"], [usuario, pass],
+                    function (success) {
+                        if (success) {
+                            window.location.href = "../BancoFalso/index";
+                        }
+                        else {
+                            alert("Revise las credenciales.");
+                        }
+                    },
+                    function (a, b, c) {
+                        alert("Ocurrió una excepción al iniciar sesión en Bco. Falso.");
+                    }
+                );
+            }
+        }
+    }
+</script>

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<barCode.Models.CuentasModel>
+
+    <select id="cuentas" class="form-control" name="cuentas">
+        <option value="">Seleccione Cuenta</option>
+        @*<option value="154">Cuenta Corriente</option>
+            <option value="155">Cuenta Vista</option>*@
+        @foreach (var x in Model.Where(t => t.idTipoCuenta < 3).ToList())
+        {
+            string ntc = "";
+            if (x.idTipoCuenta == 1)
+            {
+                ntc = "Cuenta Corriente";
+            }
+            else
+            {
+                ntc = "Cuenta Vista";
+            }
+            <option value="@x.id">@ntc @x.numeroCuenta</option>
+        }
+
+    </select>
+

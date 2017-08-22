@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - { Bar Code }</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Fondo.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("{ Bar Code }", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Catalogo", "Index", "Catalogo")</li>
+                    <li>@Html.ActionLink("Carrito", "Index", "Carrito")</li>
+                    <li class="dropdown">
+                        <a href="#" style="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Mantención
+                            <span style="" class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Clientes", "Index", "Clientes")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Productos", "Index", "Productos")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Pago", "Index", "BancoFalso")</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div align="right">
+                    <p></p>
+                    @if (Session["Usuario"] == null)
+                    {
+                        <a href="#myModal" class="btnLogin btn-sm btn-info" data-toggle="modal">Iniciar Sesión</a>
+
+                        <a class="btn btn-xs btn-success text-shadow" href="/Clientes/Create">Registrarse</a>
+                    }
+                    else
+                    {
+                        <a class="text-info">@Html.ActionLink("Hola " + Session["NomUsuario"] + "!!", "Compras", "Clientes") |</a>
+                        <a class="text-info" href="/Login/logout">Cerrar Sesion</a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p style="color:white">&copy; @DateTime.Now.Year - { Bar Code }</p>
+        </footer>
+    </div>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!--modal-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-content">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/ScriptGeneral.js"></script>
+
+    <script>
+        $(".btnLogin").click(function (eve) {
+
+            $("#modal-content").load("/Login/Index/" + $(this).data("id"));
+
+        });
+    </script>
+
+
+
+</body>
+</html>

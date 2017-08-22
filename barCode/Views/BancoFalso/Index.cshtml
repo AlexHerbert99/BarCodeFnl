@@ -1,0 +1,95 @@
+﻿@model IEnumerable<barCode.Models.Carrito>
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2 style="color:white">Realizar Pago</h2>
+    <h5 style="color:white">Detalle de Pago:</h5>
+
+    @*@Html.DropDownList("cuentas", ViewData["cuentas"] as SelectList)*@
+
+    @Html.Action("traerCuentas")
+    <p></p>
+
+    <table class="table table-hover table-bordered" style="background-color:white">
+        <tr>
+            <th>Producto</th>
+            <th>Precio Unitario</th>
+            <th>Cantidad</th>
+            <th>Total a Pagar</th>
+        </tr>
+        @{
+            double total = 0;
+        }
+
+        @foreach (var item in Model)
+        {
+            total += (double)(item.Cantidad * item.PrecioUnitario);
+            double stotal = (double)(item.Cantidad * item.PrecioUnitario);
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.NombreProducto)</td>
+                <td>@String.Format("{0:C}", item.PrecioUnitario)</td>
+                <td>@Html.DisplayFor(modelItem => item.Cantidad)</td>
+                <td>@String.Format("{0:C}", stotal)</td>
+            </tr>
+        }
+        <tfoot>
+            <tr>
+                <th colspan="3">Total</th>
+                <th id="totalCarrito">@String.Format("{0:C}", total)</th>
+            </tr>
+        </tfoot>
+    </table>
+
+    <p></p>
+
+    @if (Session["Usuario"] == null)
+    {
+        <a class="btn btn-info" href="/Login/Index">Pagar</a>
+    }
+    else
+    {
+        <button class="btn btn-info" onclick="enviarMonto();">Pagar</button>
+    }
+
+    <hr />
+    <h4 style="color:white">Anular una Compra</h4>
+    <form action="/BancoFalso/anularCompra">
+        <input type="text" name="idPedido" placeholder="Numero de Pedido" class="form-control" /><p></p>
+        <input type="text" name="idCuenta" placeholder="Codigo de Cuenta" class="form-control" /><p></p>
+        <input type="text" name="descripcion" placeholder="Observacion" class="form-control" /><p></p>
+        <input type="text" name="monto" placeholder="Monto" class="form-control" /><p></p>
+        <input type="submit" value="Enviar" class="btn btn-info" />
+    </form>
+
+
+    <script>
+        function enviarMonto() {
+
+            var cuenta = $('#cuentas').val();
+            var monto = '@total';
+
+            if (cuenta == "") {
+                alert("Seleccione una cuenta.");
+            }
+            else {
+
+                EjecutarAjax("/BancoFalso/Pagar", ["monto", "cuenta"], [monto, cuenta],
+                    function (success) {
+                        if (success) {
+                            window.location.href = "../BancoFalso/PagoOk";
+                        }
+                        else {
+                            alert("Revise las credenciales.");
+                        }
+                    },
+                    function (a, b, c) {
+                        alert("Ocurrió una excepción al iniciar sesión en Bco. Falso.");
+                    }
+                );
+            }
+        }
+    </script>
+
+
+

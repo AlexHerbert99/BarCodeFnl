@@ -1,0 +1,44 @@
+﻿@model IEnumerable<barCode.Models.Carrito>
+
+@{
+    ViewBag.Title = "Detalle Venta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:white">Detalle Venta </h2>
+
+<table class="table table-hover table-bordered" style="background-color:white">
+    <tr>
+        <th>Foto</th>
+        <th>Nombre</th>
+        <th>Marca</th>
+        <th>Valor Caja</th>
+        <th>Cajas</th>
+        <th>Subtotal</th>
+    </tr>
+    @{
+        double total = 0;
+    }
+    @foreach (var item in Model)
+    {
+        total += (double)(item.Cantidad * item.PrecioUnitario);
+        double stotal = (double)(item.Cantidad * item.PrecioUnitario);
+
+        <tr>
+            <td><img src="@Url.Content(item.ImagenProducto)" height="100" width="100" /></td>
+            <td>@item.NombreProducto</td>
+            <td>@Html.DisplayFor(modelItem => item.Marca)</td>
+            <td>@String.Format("{0:C}", item.PrecioUnitario)</td>
+            <td>@Html.DisplayFor(modelItem => item.Cantidad)</td>
+            <td>@String.Format("{0:C}", total)</td>
+        </tr>
+    }
+    <tfoot>
+        <tr>
+            <th colspan="5">Total</th>
+            <th>@String.Format("{0:C}", total)</th>
+        </tr>
+    </tfoot>
+</table>
+
+@Html.ActionLink("Volver", "Compras", null, new { @class = "btn btn-success" })
