@@ -3,15 +3,15 @@
         ViewBag.Title = "Index";
     }
 
-    <h2 style="color:white">Realizar Pago</h2>
-    <h5 style="color:white">Detalle de Pago:</h5>
+    <h2>Realizar Pago</h2>
+    <h5>Detalle de Pago:</h5>
 
     @*@Html.DropDownList("cuentas", ViewData["cuentas"] as SelectList)*@
 
     @Html.Action("traerCuentas")
     <p></p>
 
-    <table class="table table-hover table-bordered" style="background-color:white">
+    <table class="table table-hover table-bordered">
         <tr>
             <th>Producto</th>
             <th>Precio Unitario</th>
@@ -53,7 +53,7 @@
     }
 
     <hr />
-    <h4 style="color:white">Anular una Compra</h4>
+    <h4>Anular una Compra</h4>
     <form action="/BancoFalso/anularCompra">
         <input type="text" name="idPedido" placeholder="Numero de Pedido" class="form-control" /><p></p>
         <input type="text" name="idCuenta" placeholder="Codigo de Cuenta" class="form-control" /><p></p>

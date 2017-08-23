@@ -1,0 +1,32 @@
+﻿@model barCode.Models.Categoria
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 style="color:white">Eliminar</h2>
+
+<h3 style="color:white">Estas Seguro?</h3>
+<div>
+    <h4 style="color:white">Categoria</h4>
+    <hr />
+    <dl class="dl-horizontal" style="color:white">
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

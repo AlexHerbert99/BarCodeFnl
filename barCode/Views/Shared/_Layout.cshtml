@@ -7,7 +7,7 @@
     <title>@ViewBag.Title - { Bar Code }</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/Fondo.css" rel="stylesheet" />
+    
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -44,9 +44,9 @@
                     <p></p>
                     @if (Session["Usuario"] == null)
                     {
-                        <a href="#myModal" class="btnLogin btn-sm btn-info" data-toggle="modal">Iniciar Sesión</a>
+                        <a href="#myModal" class="btnLogin btn btn-xs btn-default" data-toggle="modal">Iniciar Sesión</a>
 
-                        <a class="btn btn-xs btn-success text-shadow" href="/Clientes/Create">Registrarse</a>
+                        <a class="btn btn-xs btn-default text-shadow" href="/Clientes/Create">Registrarse</a>
                     }
                     else
                     {
